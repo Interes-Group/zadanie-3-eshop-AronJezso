@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.cart.data;
+package sk.stuba.fei.uim.oop.assignment3.product.data;
 
 
 import lombok.Data;
@@ -10,11 +10,15 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class CartEntry {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private String name;
+    private String description;
+    private Long amount;
+    private String unit;
+    private Long price;
 }
