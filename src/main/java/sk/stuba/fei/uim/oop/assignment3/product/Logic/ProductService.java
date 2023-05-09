@@ -1,9 +1,11 @@
 package sk.stuba.fei.uim.oop.assignment3.product.Logic;
 
+import sk.stuba.fei.uim.oop.assignment3.product.exeption.*;
 import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.product.data.Product;
 import sk.stuba.fei.uim.oop.assignment3.product.data.IProductRep;
 import sk.stuba.fei.uim.oop.assignment3.product.web.ProductRequest;
+import sk.stuba.fei.uim.oop.assignment3.product.web.ProductUpdateRequest;
 
 import java.util.List;
 
@@ -21,18 +23,62 @@ public class ProductService implements IProductService {
         return this.repository.findAll();
     }
 
+
+    @Override
     public Product createProduct(ProductRequest body){
-        Product a = new Product();
-        a.setName(body.getName());
-        a.setDescription(body.getDescription());
-        a.setAmount(body.getAmount());
-        a.setUnit(body.getUnit());
-        a.setPrice(body.getPrice());
+        Product a = new Product(
+                body.getName(),
+                body.getDescription(),
+                body.getAmount(),
+                body.getUnit(),
+                body.getPrice());
         return this.repository.save(a);
     }
 
     @Override
-    public List<Product> getById(Long id) {
-        return this.repository.findAllById(id);
+    public Product getById(Long id) throws NotFoundException{
+        Product b = this.repository.findProductById(id);
+        if (b == null) {
+            throw new NotFoundException();
+        }
+        return b;
+
+    }
+    @Override
+    public Product update(Long id, ProductUpdateRequest request) throws NotFoundException {
+        Product b = this.getById(id);
+        if (request.getName() != null) {
+            b.setName(request.getName());
+        }
+        if (request.getDescription() != null) {
+            b.setDescription(request.getDescription());
+        }
+        if (request.getUnit() != null) {
+            b.setUnit(request.getUnit());
+        }
+        if (request.getPrice() != 0) {
+            b.setPrice(request.getPrice());
+        }
+        return this.repository.save(b);
+    }
+
+    @Override
+    public void delete(Long id) throws NotFoundException {
+        Product b = this.getById(id);
+        //update for cart
+        this.repository.delete(b);
+    }
+
+    @Override
+    public Long getAmount(Long id) throws NotFoundException {
+        return this.getById(id).getAmount();
+    }
+
+    @Override
+    public Long addAmount(Long id, Long increment) throws NotFoundException {
+        Product b = this.getById(id);
+        b.setAmount(b.getAmount() + increment);
+        this.repository.save(b);
+        return b.getAmount();
     }
 }

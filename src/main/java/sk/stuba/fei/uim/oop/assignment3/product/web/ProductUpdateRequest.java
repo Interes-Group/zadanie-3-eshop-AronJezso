@@ -5,10 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductRequest {
+public class ProductUpdateRequest {
     private String name;
     private String description;
-    private Long amount;
     private String unit;
     private double price;
 }

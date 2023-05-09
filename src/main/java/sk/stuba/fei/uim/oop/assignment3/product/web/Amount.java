@@ -1,14 +1,14 @@
 package sk.stuba.fei.uim.oop.assignment3.product.web;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class ProductRequest {
-    private String name;
-    private String description;
+@NoArgsConstructor
+@AllArgsConstructor
+public class Amount {
     private Long amount;
-    private String unit;
-    private double price;
 }
