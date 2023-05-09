@@ -4,6 +4,8 @@ import lombok.Data;
 import sk.stuba.fei.uim.oop.assignment3.product.data.Product;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -14,13 +16,12 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
-    private Product product;
+    @OneToMany
+    private List<Product> shoppingList;
     private boolean payed;
 
-    public Cart(Product product, Long amount) {
-        this.product = product;
-        this.amount = amount;
+    public Cart() {
+        this.shoppingList = new ArrayList<>();
     }
 
 
