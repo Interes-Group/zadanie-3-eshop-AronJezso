@@ -1,6 +1,5 @@
 package sk.stuba.fei.uim.oop.assignment3.cart.data;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import sk.stuba.fei.uim.oop.assignment3.product.data.Product;
 
 import javax.persistence.*;
@@ -22,10 +21,6 @@ public class CartEntry {
 
     }
 
-    public CartEntry(Product product, Long amount) {
-        this.product = product;
-        this.amount = amount;
-    }
 
 
 }

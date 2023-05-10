@@ -3,7 +3,7 @@ package sk.stuba.fei.uim.oop.assignment3.product.data;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import sk.stuba.fei.uim.oop.assignment3.cart.data.CartEntry;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

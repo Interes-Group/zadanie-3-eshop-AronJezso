@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.uim.oop.assignment3.cart.Logic.ICartService;
 import sk.stuba.fei.uim.oop.assignment3.exeption.*;
-import sk.stuba.fei.uim.oop.assignment3.cart.web.CartEntry;
+
 
 @RestController
 @RequestMapping("/cart")
