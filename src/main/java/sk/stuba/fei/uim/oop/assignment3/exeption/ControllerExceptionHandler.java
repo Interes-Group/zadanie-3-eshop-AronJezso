@@ -1,4 +1,4 @@
-package sk.stuba.fei.uim.oop.assignment3.product.exeption;
+package sk.stuba.fei.uim.oop.assignment3.exeption;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

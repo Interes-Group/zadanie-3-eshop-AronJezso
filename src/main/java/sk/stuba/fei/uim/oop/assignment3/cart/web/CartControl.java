@@ -6,11 +6,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sk.stuba.fei.uim.oop.assignment3.cart.Logic.ICartService;
-import sk.stuba.fei.uim.oop.assignment3.product.exeption.*;
-import sk.stuba.fei.uim.oop.assignment3.product.web.ProductResponse;
-
-import java.util.List;
-import java.util.stream.Collectors;
+import sk.stuba.fei.uim.oop.assignment3.exeption.*;
+import sk.stuba.fei.uim.oop.assignment3.cart.web.CartEntry;
 
 @RestController
 @RequestMapping("/cart")
@@ -25,12 +22,22 @@ public class CartControl {
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public CartResponse getList(@PathVariable("id") long listId) throws NotFoundException {
-        return new CartResponse(this.cartService.getById(listId));
+    public CartResponse getList(@PathVariable("id") Long listId) throws NotFoundException {
+        return new CartResponse(this.cartService.getCartById(listId));
     }
 
     @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable("id") long listId) throws NotFoundException, IllegalOperationException  {
+    public void delete(@PathVariable("id") Long listId) throws NotFoundException, IllegalOperationException {
         this.cartService.delete(listId);
+    }
+
+    @PostMapping(value = "/{id}/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public CartResponse addToCart(@PathVariable("id") Long cartId, @RequestBody CartEntry cartEntry) throws NotFoundException, IllegalOperationException {
+        return new CartResponse(this.cartService.addToCart(cartId, cartEntry));
+    }
+
+    @GetMapping(value = "/{id}/pay", produces = MediaType.TEXT_PLAIN_VALUE)
+    public String payForCart(@PathVariable("id") Long cartId) throws NotFoundException, IllegalOperationException {
+        return "" + this.cartService.payForCart(cartId);
     }
 }
