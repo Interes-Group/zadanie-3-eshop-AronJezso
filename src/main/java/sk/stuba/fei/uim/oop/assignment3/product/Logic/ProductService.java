@@ -1,6 +1,5 @@
 package sk.stuba.fei.uim.oop.assignment3.product.Logic;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import sk.stuba.fei.uim.oop.assignment3.exeption.NotFoundException;
 import sk.stuba.fei.uim.oop.assignment3.exeption.*;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,8 @@ import java.util.List;
 
 @Service
 public class ProductService implements IProductService {
-    @Autowired
-    private IProductRep repository;
+
+    private final IProductRep repository;
 
     public ProductService(IProductRep repository) {
         this.repository = repository;

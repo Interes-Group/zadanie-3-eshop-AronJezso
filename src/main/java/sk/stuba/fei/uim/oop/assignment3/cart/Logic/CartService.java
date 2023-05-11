@@ -1,7 +1,7 @@
 package sk.stuba.fei.uim.oop.assignment3.cart.Logic;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import sk.stuba.fei.uim.oop.assignment3.cart.data.Cart;
 import sk.stuba.fei.uim.oop.assignment3.cart.web.CartEntry;
@@ -13,14 +13,21 @@ import java.util.List;
 
 @Service
 public class CartService implements ICartService{
-    @Autowired
-    private ICartRep repository;
 
-    @Autowired
-    private IProductService productService;
+    private final ICartRep repository;
+    private final IProductService productService;
+    private final ICartEntryService cartEntryService;
+    public CartService(ICartRep repository,IProductService productService,ICartEntryService cartEntryService) {
+        this.repository = repository;
+        this.productService = productService;
+        this.cartEntryService = cartEntryService;
+    }
 
-    @Autowired
-    private ICartEntryService cartEntryService;
+ 
+
+
+
+
 
     @Override
     public Cart create() {
